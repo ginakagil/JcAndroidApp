@@ -1,9 +1,13 @@
 package com.example.jinkelly.jcandroidapp;
 
+import android.app.DialogFragment;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -11,6 +15,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        View backgroundimage = findViewById(R.id.frontbg);
+        Drawable backgroundimg = backgroundimage.getBackground();
+        backgroundimg.setAlpha(80);
     }
 
     @Override
@@ -30,8 +37,22 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.exitbtn) {
+            DialogFragment myFragment = new MyDiagFrag();
+            myFragment.show(getFragmentManager(), "theDialog");
+
+            return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void chkinOpenTrans(View view) {
+        Intent checkinTransIntent = new Intent(this, ProcessTrans.class);
+
+        checkinTransIntent.putExtra("action_mode","check_in");
+        startActivity(checkinTransIntent);
     }
 }

@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">JcAndroidApp</string>
+    <string name="app_name">SPH WAREHOUSE</string>
     <string name="action_settings">Settings</string>
+    <string name="chkinbtntxt">CHECK IN</string>
+    <string name="chkoutbtntxt">CHECK OUT</string>
+    <string name="lbtranstitle">TRANSACTIONS LIST:</string>
+    <string name="transnew">CREATE NEW</string>
+    <string name="scanbtntxt">SCAN</string>
+    <string name="exit">EXIT</string>
+    <string name="main_menu">MENU</string>
+    <string name="btnlbconfirm">Confirm and Submit</string>
+    <string name="lblocation">Location</string>
+    <string name="lbboxnum">BoxNumber</string>
 </resources>
