@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    >
+
+    <TextView
+        android:id="@+id/transtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:background="#0000EE"
+        android:text="@string/lbtranstitle"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/transView"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+    <Button
+        android:id="@+id/btnnewtran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/transnew"
+        android:height="50dp"
+        android:textSize="22sp"
+        android:padding="10dp"
+        android:background="#0000EE"
+        android:textColor="#FFFFFF"
+        android:onClick="createTrans"
+        /></LinearLayout>
+</LinearLayout>
+</LinearLayout>
