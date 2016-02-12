@@ -2,21 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="3">
+    >
 
     <TextView
         android:id="@+id/tvtransmode"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:textSize="22sp"
         android:text="Transaction Mode:"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="4"
         android:orientation="vertical">
-
 
     <TextView
         android:layout_width="match_parent"
@@ -45,14 +45,15 @@
         android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="@string/scanbtntxt"/>
+        android:text="@string/scanbtntxt"
+        android:onClick="ScanBn"/>
 </LinearLayout>
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="4">
     <TextView
 
         android:layout_width="match_parent"
@@ -85,12 +86,13 @@
 </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1">
+    android:layout_height="0dp"
+    android:layout_weight="1.5"
+    android:orientation="vertical">
     <Button
         android:id="@+id/btntransub"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:text="@string/btnlbconfirm"
         android:padding="10dp"
         android:textSize="20sp"
@@ -104,5 +106,26 @@
         android:layout_height="wrap_content" />
 </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
 
+    <com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.jinkelly.jcandroidapp.ui.camera.GraphicOverlay
+            android:id="@+id/graphicOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview>
+        <TextView
+            android:id="@+id/tvbarcodemsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
