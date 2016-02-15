@@ -26,6 +26,8 @@
         android:textColor="#FFFFFF"
         android:padding="10dp"
         android:background="#0066FF"
+        android:inputType="none"
+        android:textIsSelectable="true"
         />
 
     <EditText

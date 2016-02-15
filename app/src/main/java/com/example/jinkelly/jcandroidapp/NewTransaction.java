@@ -3,6 +3,7 @@ package com.example.jinkelly.jcandroidapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,9 @@ public class NewTransaction extends AppCompatActivity {
         setContentView(R.layout.transaction_form);
          statusMessage = (TextView)findViewById(R.id.tvbarcodemsg);
          barcodeValue = (TextView)findViewById(R.id.etbn);
+        barcodeValue.setInputType(InputType.TYPE_NULL);
+        barcodeValue.setTextIsSelectable(true);
+
 
         TextView transTitle = (TextView)
                 findViewById(R.id.tvtransmode);
