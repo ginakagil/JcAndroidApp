@@ -53,6 +53,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 /**
  * Activity for the multi-tracker app.  This app detects barcodes and displays the value with the
@@ -72,7 +73,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
-    private static String BarcodeValue = "";
+
+    //private static String FieldName = "";
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
@@ -97,6 +99,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         // read parameters from the intent used to launch the activity.
         boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
         boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
+        //FieldName = getIntent().getStringExtra("FieldName");
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -201,6 +204,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                                     Intent data = new Intent();
                                     //BarcodeValue = barcodes.valueAt(0).displayValue.toString();
                                     data.putExtra(BarcodeObject, barcodes.valueAt(0));
+                                    //data.putExtra("FieldName", FieldName);
                                     setResult(CommonStatusCodes.SUCCESS, data);
                                     finish();
                                 }

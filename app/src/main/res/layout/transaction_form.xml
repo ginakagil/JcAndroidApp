@@ -18,6 +18,17 @@
         android:layout_weight="4"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,29 +37,51 @@
         android:textColor="#FFFFFF"
         android:padding="10dp"
         android:background="#0066FF"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvboxdept"/>
+
+    <EditText
+        android:id="@+id/etdept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:inputType="none"
         android:textIsSelectable="true"
         />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvboxnumber"/>
 
-    <EditText
-        android:id="@+id/etbn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
-
+        <EditText
+            android:id="@+id/etbn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:inputType="none"
+            android:textIsSelectable="true"
+            />
+            </LinearLayout>
 
     <Button
         android:id="@+id/btnbnscan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="@string/scanbtntxt"
+        android:layout_weight="1"
         android:onClick="ScanBn"/>
+        </LinearLayout>
 </LinearLayout>
     <LinearLayout
 
@@ -56,6 +89,16 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_weight="4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2">
     <TextView
 
         android:layout_width="match_parent"
@@ -65,7 +108,18 @@
         android:background="#FF5500"
         android:text="@string/lblocation"
         android:textSize="22sp"
+        android:id="@+id/tvbartarget"
         />
+                <TextView
+                    android:id="@+id/tvslotid"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/tvslottxt"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
     <EditText
         android:id="@+id/etloc"
         android:layout_width="match_parent"
@@ -73,61 +127,68 @@
         android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:inputType="none"
+        android:textIsSelectable="true"
         />
 
-
+</LinearLayout>
     <Button
         android:id="@+id/btnlocscan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="@string/scanbtntxt"/>
-
+        android:text="@string/scanbtntxt"
+        android:layout_weight="1"
+        android:onClick="ScanBn"/>
 </LinearLayout>
+</LinearLayout>
+    <TextView
+        android:id="@+id/tvbarcodemsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1.5"
-    android:orientation="vertical">
+    android:layout_weight="8"
+
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.jinkelly.jcandroidapp.ui.camera.GraphicOverlay
+                android:id="@+id/graphicOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btntransub"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         android:text="@string/btnlbconfirm"
         android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="#00FF00"
+        android:background="#2fa42f"
         android:onClick="subTrans"/>
 
-    <TextView
-        android:id="@+id/timestamp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:orientation="vertical">
-
-    <com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview
-        android:id="@+id/preview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.example.jinkelly.jcandroidapp.ui.camera.GraphicOverlay
-            android:id="@+id/graphicOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview>
-        <TextView
-            android:id="@+id/tvbarcodemsg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 </LinearLayout>
