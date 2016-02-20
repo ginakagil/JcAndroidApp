@@ -1,11 +1,15 @@
 package com.example.jinkelly.jcandroidapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.JsonReader;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +23,15 @@ import com.google.android.gms.vision.barcode.Barcode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.SimpleTimeZone;
@@ -36,7 +48,9 @@ public class NewTransaction extends AppCompatActivity {
     private TextView slotId;
     private TextView slotTxt;
     private TextView locTarget;
-    private TextView locValue;
+    private TextView locSlottxt;
+    private TextView locSlotid;
+    private Button submitbtn;
     public String action_mode = "";
     public String poststatus = "PEND";
     private String xError;
@@ -59,10 +73,19 @@ public class NewTransaction extends AppCompatActivity {
         boxNumber.setTextIsSelectable(true);
         slotId = (TextView)findViewById(R.id.tvslotid);
         slotTxt = (TextView)findViewById(R.id.tvslottxt);
-        locValue = (EditText)findViewById(R.id.etloc);
-        locValue.setInputType(InputType.TYPE_NULL);
-        locValue.setTextIsSelectable(true);
+        locSlottxt = (EditText)findViewById(R.id.etloctxt);
+        locSlotid = (EditText)findViewById(R.id.etlocid);
+        locSlottxt.setInputType(InputType.TYPE_NULL);
+        locSlottxt.setTextIsSelectable(true);
         locTarget = (TextView)findViewById(R.id.tvbartarget);
+        submitbtn = (Button)findViewById(R.id.btntransub);
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subTrans(v);
+            }
+        });
 
 
         TextView transTitle = (TextView)
@@ -81,10 +104,11 @@ public class NewTransaction extends AppCompatActivity {
 
     }
 
+
     public void ScanBn(View v) {
         boxNumber.setError(null);
         boxDept.setError(null);
-        locValue.setError(null);
+        locSlottxt.setError(null);
         Intent intent = new Intent(this, BarcodeCaptureActivity.class);
         if (v.getId() == R.id.btnbnscan) {
             ScanMode = "BOX";
@@ -176,8 +200,6 @@ public class NewTransaction extends AppCompatActivity {
 
     public void updateLoc(String JSONBoxDetailsString){
         String ParseErrorMsg = null;
-        String displayDept = "";
-        String displayBoxNum = "";
         String displaySlot = "";
         String displaySlotTxt = "";
 
@@ -192,10 +214,15 @@ public class NewTransaction extends AppCompatActivity {
         }
         if(TextUtils.isEmpty(ParseErrorMsg)){
             if(slotId.getText().equals(displaySlot)){
-            locValue.setText(displaySlotTxt);
-            locValue.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_24dp, 0);}else{
-                locValue.setError("Not Match!");
-                locValue.setText(displaySlotTxt);
+                locSlotid.setText(displaySlot);
+                locSlottxt.setText(displaySlotTxt);
+                locSlottxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_24dp, 0);
+                locSlotid.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_24dp, 0);
+            }else{
+                locSlottxt.setError("Not Match!");
+                locSlottxt.setText(displaySlotTxt);
+                locSlotid.setText(displaySlot);
+                locSlotid.setError("Not Match!");
             }
         }
     }
@@ -206,36 +233,51 @@ public class NewTransaction extends AppCompatActivity {
             boxNumber.setError("Cannot be blank");
         }else if (TextUtils.isEmpty(boxDept.getText().toString())){
                 boxDept.setError("Cannot be blank");
-        }else if(TextUtils.isEmpty(locValue.getText().toString())){
-            locValue.setError("Cannot be blank");
+        }else if(TextUtils.isEmpty(locSlottxt.getText().toString())){
+            locSlottxt.setError("Cannot be blank");
         }else{
-            TranSubmit(boxNumber.getText().toString(), locValue.getText().toString());
+            if (locSlotid.getError() == null && locSlottxt.getError() == null && boxDept.getError() == null && boxNumber.getError() == null){
+            TranSubmit(action_mode,
+                    new Box(boxDept.getText().toString(), boxNumber.getText().toString(), slotId.getText().toString(), slotTxt.getText().toString()),
+                    new Location(locSlottxt.getText().toString(), locSlotid.getText().toString()));
+            }
         }
 
     }
 
-    public void TranSubmit(String boxnum , String location ){
+    public void TranSubmit(String ActionMode, Box inBox , Location inLocation ){
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         String formattedDate = df.format(c.getTime());
-        //make json
-        JSONObject sTransaction = new JSONObject();
+        //make arraylist
+        ArrayList<Transaction> TransList = new ArrayList<Transaction>();
+
         try {
-            sTransaction.put("boxnumber", boxnum);
-            sTransaction.put("location", location);
-            sTransaction.put("timestamp",formattedDate);
-            sTransaction.put("poststatus",poststatus);
-        }catch(JSONException ex){
-            xError = ex.toString();
-            statusMessage.setText("JSON conversion failed");
-        }
-        if( TextUtils.isEmpty(xError) ){
-            //TODO:do some posting
-            //TODO:append file
+            FileInputStream fis = openFileInput("transJson.data");
+            TransactionReader treader= new TransactionReader(fis);
+            TransList = treader.readTransFile();
+
+        }catch (Exception fex){
+            //no file
         }
 
+        TransList.add(new Transaction(action_mode,formattedDate,inBox,inLocation));
+
+        try {
+            FileOutputStream fos = openFileOutput("transJson.data", Context.MODE_PRIVATE);
+            TransactionWriter twriter = new TransactionWriter(fos);
+            twriter.writeTransFile(TransList);
+
+        }catch (Exception fex){
+
+        }
+         finish();
 
 
     }
+
+
+
+
 }

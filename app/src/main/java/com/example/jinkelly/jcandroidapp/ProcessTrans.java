@@ -5,14 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
 
 /**
  * Created by jin.chung on 11/2/2016.
  */
 public class ProcessTrans extends AppCompatActivity {
     public String action_mode = "";
+    ListView transListView = (ListView) findViewById(R.id.transView);
+    ArrayList<Transaction> TransList = new ArrayList<Transaction>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +44,20 @@ public class ProcessTrans extends AppCompatActivity {
                 transTitle.setText("CHECK OUT TRANSACTION");
                 transNew.setText("NEW CHECK OUT");
             }
+
+       //get list
+        try {
+            FileInputStream fis = openFileInput("transJson.data");
+            TransactionReader treader= new TransactionReader(fis);
+            TransList = treader.readTransFile();
+
+        }catch (Exception fex){
+            //no file
+        }
+
+
+
+
 
 
 

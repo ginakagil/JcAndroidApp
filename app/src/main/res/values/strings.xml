@@ -25,4 +25,6 @@
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
     <string name="tvboxnumber">Box Number</string>
     <string name="tvboxdept">Department</string>
+    <string name="locdesc">Description</string>
+    <string name="locid">ID number</string>
 </resources>
