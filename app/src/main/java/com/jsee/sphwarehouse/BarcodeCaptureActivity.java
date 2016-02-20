@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.jinkelly.jcandroidapp;
+package com.jsee.sphwarehouse;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -29,7 +29,6 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,20 +39,18 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
 
+
+import com.jsee.sphwarehouse.ui.camera.CameraSource;
+import com.jsee.sphwarehouse.ui.camera.CameraSourcePreview;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
-import com.example.jinkelly.jcandroidapp.ui.camera.CameraSource;
-import com.example.jinkelly.jcandroidapp.ui.camera.CameraSourcePreview;
 
-import com.example.jinkelly.jcandroidapp.ui.camera.GraphicOverlay;
-import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 /**
  * Activity for the multi-tracker app.  This app detects barcodes and displays the value with the

@@ -1,9 +1,8 @@
-package com.example.jinkelly.jcandroidapp;
+package com.jsee.sphwarehouse;
 
 import android.util.JsonWriter;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;

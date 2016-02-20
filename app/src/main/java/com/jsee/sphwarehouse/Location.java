@@ -1,4 +1,4 @@
-package com.example.jinkelly.jcandroidapp;
+package com.jsee.sphwarehouse;
 
 /**
  * Created by jin.chung on 19/2/2016.

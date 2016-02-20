@@ -1,4 +1,4 @@
-package com.example.jinkelly.jcandroidapp;
+package com.jsee.sphwarehouse;
 
 /**
  * Created by jin.chung on 19/2/2016.
@@ -9,7 +9,7 @@ public class Transaction {
     private Box Box;
     private Location Loc;
 
-    public Transaction(String action, String timestamp, com.example.jinkelly.jcandroidapp.Box box, Location loc) {
+    public Transaction(String action, String timestamp, com.jsee.sphwarehouse.Box box, Location loc) {
         Action = action;
         Timestamp = timestamp;
         Box = box;
@@ -32,11 +32,11 @@ public class Transaction {
         Timestamp = timestamp;
     }
 
-    public com.example.jinkelly.jcandroidapp.Box getBox() {
+    public com.jsee.sphwarehouse.Box getBox() {
         return Box;
     }
 
-    public void setBox(com.example.jinkelly.jcandroidapp.Box box) {
+    public void setBox(com.jsee.sphwarehouse.Box box) {
         Box = box;
     }
 

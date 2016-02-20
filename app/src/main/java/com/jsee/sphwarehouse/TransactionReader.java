@@ -1,4 +1,4 @@
-package com.example.jinkelly.jcandroidapp;
+package com.jsee.sphwarehouse;
 
 import android.util.JsonReader;
 
@@ -32,7 +32,7 @@ public class TransactionReader {
 
 
     private  ArrayList<Transaction> readTransactions(JsonReader jreader) throws IOException{
-        ArrayList<Transaction> transactionslist = new ArrayList<Transaction>();
+        ArrayList<Transaction> transactionslist = new ArrayList<>();
 
         jreader.beginArray();
         while (jreader.hasNext()) {
@@ -53,15 +53,22 @@ public class TransactionReader {
         jreader.beginObject();
         while (jreader.hasNext()){
             String name = jreader.nextName();
-            if(name.equals("actionmode")){
-                actionmode = jreader.nextString();
-            }else if(name.equals("timestamp")){
-                timestamp = jreader.nextString();
-            }else if(name.equals("boxdetail")){
-                box = readBoxdetail(jreader);
-            }else if(name.equals("location")) {
-                location = readLocation(jreader);
-            }else{jreader.skipValue();
+            switch (name) {
+                case "actionmode":
+                    actionmode = jreader.nextString();
+                    break;
+                case "timestamp":
+                    timestamp = jreader.nextString();
+                    break;
+                case "boxdetail":
+                    box = readBoxdetail(jreader);
+                    break;
+                case "location":
+                    location = readLocation(jreader);
+                    break;
+                default:
+                    jreader.skipValue();
+                    break;
             }
         }
         jreader.endObject();
@@ -76,12 +83,16 @@ public class TransactionReader {
         jreader.beginObject();
         while (jreader.hasNext()) {
             String name = jreader.nextName();
-            if (name.equals("slot_id")) {
-                slot_id = jreader.nextString();
-            } else if (name.equals("slot_text")) {
-                slot_text = jreader.nextString();
-            } else {
-                jreader.skipValue();
+            switch (name) {
+                case "slot_id":
+                    slot_id = jreader.nextString();
+                    break;
+                case "slot_text":
+                    slot_text = jreader.nextString();
+                    break;
+                default:
+                    jreader.skipValue();
+                    break;
             }
         }
         jreader.endObject();
@@ -97,15 +108,22 @@ public class TransactionReader {
         jreader.beginObject();
         while (jreader.hasNext()){
             String name = jreader.nextName();
-            if(name.equals("dept")){
-                dept = jreader.nextString();
-            }else if(name.equals("box_no")){
-                box_no = jreader.nextString();
-            }else if(name.equals("slot_id")){
-                slot_id = jreader.nextString();
-            }else if(name.equals("slot_text")) {
-                slot_text = jreader.nextString();
-            }else{jreader.skipValue();
+            switch (name) {
+                case "dept":
+                    dept = jreader.nextString();
+                    break;
+                case "box_no":
+                    box_no = jreader.nextString();
+                    break;
+                case "slot_id":
+                    slot_id = jreader.nextString();
+                    break;
+                case "slot_text":
+                    slot_text = jreader.nextString();
+                    break;
+                default:
+                    jreader.skipValue();
+                    break;
             }
         }
         jreader.endObject();
