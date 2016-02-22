@@ -7,7 +7,7 @@ public class Location {
     private String Slotid;
     private String Slottxt;
 
-    public Location(String slottxt, String slotid) {
+    public Location( String slotid, String slottxt) {
         Slottxt = slottxt;
         Slotid = slotid;
     }

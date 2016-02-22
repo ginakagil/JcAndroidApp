@@ -228,7 +228,7 @@ public class NewTransaction extends AppCompatActivity {
             if (locSlotid.getError() == null && locSlottxt.getError() == null && boxDept.getError() == null && boxNumber.getError() == null){
             TranSubmit(action_mode,
                     new Box(boxDept.getText().toString(), boxNumber.getText().toString(), slotId.getText().toString(), slotTxt.getText().toString()),
-                    new Location(locSlottxt.getText().toString(), locSlotid.getText().toString()));
+                    new Location( locSlotid.getText().toString(), locSlottxt.getText().toString()));
             }
         }
 
